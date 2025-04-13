@@ -1,0 +1,23 @@
+---
+const repositoryId = import.meta.env.COMMENT_REPOSITORY_ID;
+const categoryId = import.meta.env.COMMENT_CATEGORY_ID;
+---
+
+<section class='giscus mx-auto mt-10 w-full'></section>
+
+<script
+  src='https://giscus.app/client.js'
+  data-repo='Whis-dev/blog-www'
+  data-repo-id={repositoryId}
+  data-category='Comments'
+  data-category-id={categoryId}
+  data-mapping='url'
+  data-strict='0'
+  data-reactions-enabled='1'
+  data-emit-metadata='0'
+  data-input-position='bottom'
+  data-theme='dark'
+  data-lang='ko'
+  data-loading='lazy'
+  crossorigin='anonymous'
+  async></script>
