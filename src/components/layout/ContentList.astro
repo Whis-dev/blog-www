@@ -1,0 +1,70 @@
+---
+import type { JSX } from "astro/jsx-runtime";
+
+type TMdxModule = {
+  frontmatter: {
+    title?: string;
+    excerpt?: string;
+    date?: string;
+    [key: string]: unknown;
+  };
+  Content: () => JSX.Element;
+};
+
+const path = Astro.url.pathname;
+
+let allPosts: Record<string, TMdxModule>;
+
+switch (path) {
+  case "/mind-palace":
+    allPosts = import.meta.glob("@/contents/mind-palace/*.mdx", {
+      eager: true,
+    });
+    break;
+
+  case "/post-mortem":
+  default:
+    allPosts = import.meta.glob("@/contents/post-mortem/*.mdx", {
+      eager: true,
+    });
+    break;
+}
+
+const posts = Object.keys(allPosts).map((filePath) => {
+  const post = allPosts[filePath];
+  const segments = filePath.split("/");
+  const fileName = segments[segments.length - 1];
+  const slug = fileName.replace(".mdx", "");
+
+  return {
+    slug,
+    title: post.frontmatter.title || slug,
+    excerpt: post.frontmatter.excerpt ?? "",
+  };
+});
+---
+
+<h2 class='text-2xl'>Index</h2>
+
+{
+  posts.length ? (
+    <ul class='flex space-x-6 mt-[12px]'>
+      {posts.map((post) => (
+        <li>
+          <a
+            href={`/post-mortem/${post.slug}`}
+            class='transition duration-200 ease-in-out hover:text-gray-900 text-gray-600'
+          >
+            {post.title}
+          </a>
+          {post.excerpt && <p>{post.excerpt}</p>}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class='text-center text-gray-500 font-medium py-4'>
+      Looks like we don’t have any content to display right now. Please check
+      back soon!
+    </p>
+  )
+}

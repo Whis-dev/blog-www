@@ -1,0 +1,28 @@
+---
+import Button from "@/components/common/Button.astro";
+
+const pages = [
+  {
+    name: "Mind Palace",
+    href: "/mind-palace",
+  },
+  {
+    name: "Post-mortem",
+    href: "/post-mortem",
+  },
+];
+---
+
+<nav class='col-span-1 row-span-1 px-[20px] py-[8px]'>
+  <ul class='flex ps-[12px] flex-col gap-[8px]'>
+    {
+      pages.map((page) => (
+        <li>
+          <Button as='a' href={page.href}>
+            {page.name}
+          </Button>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

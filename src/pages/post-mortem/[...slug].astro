@@ -1,0 +1,16 @@
+---
+import { getEntry, render } from "astro:content";
+
+import Post from "@/layouts/Post.astro";
+
+const { slug } = Astro.params;
+const postmortem = await getEntry("postmortem", slug as string);
+
+if (!postmortem) return Astro.redirect("/404");
+
+const { Content } = await render(postmortem);
+---
+
+<Post>
+  <Content />
+</Post>

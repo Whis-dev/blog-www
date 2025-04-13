@@ -1,0 +1,13 @@
+---
+import Comments from "@/components/common/Comments.astro";
+import PostContent from "@/components/layout/PostContent.astro";
+import Main from "@/layouts/Main.astro";
+---
+
+<Main>
+  <PostContent>
+    <slot />
+  </PostContent>
+
+  <Comments />
+</Main>

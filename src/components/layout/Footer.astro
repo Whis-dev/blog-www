@@ -1,0 +1,12 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<footer class='col-span-2 row-span-1 px-[20px] py-[8px]'>
+  <h6 class='h-full w-full flex justify-end items-center'>{title}</h6>
+</footer>
